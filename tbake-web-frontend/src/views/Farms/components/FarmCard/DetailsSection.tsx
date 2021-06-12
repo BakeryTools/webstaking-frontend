@@ -18,7 +18,7 @@ const Wrapper = styled.div`
 
 const StyledLinkExternal = styled(LinkExternal)`
   font-weight: 400;
-  color: #964b00;
+  color: #fe6220;
 
   svg {
     fill: #964b00;

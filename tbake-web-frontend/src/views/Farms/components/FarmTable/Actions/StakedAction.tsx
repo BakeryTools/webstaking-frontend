@@ -98,7 +98,7 @@ const Staked: React.FunctionComponent<StackedActionProps> = ({
 
   if (!account) {
     return (
-      <ActionContainer>
+      <ActionContainer style={{ border: '2px solid #964B00' }}>
         <ActionTitles>
           <Subtle>{t('Start Farming').toUpperCase()}</Subtle>
         </ActionTitles>
@@ -112,7 +112,7 @@ const Staked: React.FunctionComponent<StackedActionProps> = ({
   if (isApproved) {
     if (stakedBalance.gt(0)) {
       return (
-        <ActionContainer>
+        <ActionContainer style={{ border: '2px solid #964B00' }}>
           <ActionTitles>
             <Title>{lpSymbol} </Title>
             <Subtle>{t('Staked').toUpperCase()}</Subtle>
@@ -139,7 +139,7 @@ const Staked: React.FunctionComponent<StackedActionProps> = ({
     }
 
     return (
-      <ActionContainer>
+      <ActionContainer style={{ border: '2px solid #964B00' }}>
         <ActionTitles>
           <Subtle>{t('Stake').toUpperCase()} </Subtle>
           <Title>{lpSymbol}</Title>
@@ -160,7 +160,7 @@ const Staked: React.FunctionComponent<StackedActionProps> = ({
 
   if (!userDataReady) {
     return (
-      <ActionContainer>
+      <ActionContainer style={{ border: '2px solid #964B00' }}>
         <ActionTitles>
           <Subtle>{t('Start Farming').toUpperCase()}</Subtle>
         </ActionTitles>
@@ -172,12 +172,18 @@ const Staked: React.FunctionComponent<StackedActionProps> = ({
   }
 
   return (
-    <ActionContainer>
+    <ActionContainer style={{ border: '2px solid #964B00' }}>
       <ActionTitles>
         <Subtle>{t('Enable Farm').toUpperCase()}</Subtle>
       </ActionTitles>
       <ActionContent>
-        <Button width="100%" disabled={requestedApproval} onClick={handleApprove} variant="secondary">
+        <Button
+          style={{ borderColor: '#FE6220', color: '#FE6220' }}
+          width="100%"
+          disabled={requestedApproval}
+          onClick={handleApprove}
+          variant="secondary"
+        >
           {t('Enable')}
         </Button>
       </ActionContent>

@@ -42,10 +42,6 @@ const TableBody = styled.tbody`
     td {
       font-size: 16px;
       vertical-align: middle;
-
-      div {
-        color: black;
-      }
     }
   }
 `

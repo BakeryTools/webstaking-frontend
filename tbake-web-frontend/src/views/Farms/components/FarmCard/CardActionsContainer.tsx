@@ -74,7 +74,13 @@ const CardActions: React.FC<FarmCardActionsProps> = ({ farm, account, addLiquidi
         addLiquidityUrl={addLiquidityUrl}
       />
     ) : (
-      <Button mt="8px" width="100%" disabled={requestedApproval} onClick={handleApprove}>
+      <Button
+        style={{ backgroundColor: '#FE6220', color: 'white' }}
+        mt="8px"
+        width="100%"
+        disabled={requestedApproval}
+        onClick={handleApprove}
+      >
         {t('Approve Contract')}
       </Button>
     )

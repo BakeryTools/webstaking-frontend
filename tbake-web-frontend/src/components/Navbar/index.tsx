@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Flex, useMatchBreakpoints } from '@pancakeswap/uikit'
+import { Flex, Text, useMatchBreakpoints } from '@pancakeswap/uikit'
 import styled from 'styled-components'
 import { useWeb3React } from '@web3-react/core'
 
@@ -11,6 +11,7 @@ import Accessibility from './UserBlock'
 import NavLinks from './navLinks'
 import MobileNavLinks from './mobileNavLinks'
 import Avatar from './Avatar'
+import Logo from './Logo'
 
 const NavbarContainer = styled.div`
   width: 100%;
@@ -19,14 +20,14 @@ const NavbarContainer = styled.div`
   display: flex;
   align-items: center;
   padding: 0 1.5em;
+  background-color: white;
 
   button {
-    background-color: #964b00;
+    background-color: black;
+    border-color: #fe6220;
+    border-style: solid;
+    border-width: 2px;
   }
-`
-
-const LeftSection = styled.div`
-  display: flex;
 `
 
 const MiddleSection = styled.div`
@@ -54,7 +55,7 @@ function Navbar() {
     <NavbarContainer>
       {isMobile &&
         (isOpen ? <XIcon onClick={() => setOpen(!isOpen)} /> : <MenuIcon onClick={() => setOpen(!isOpen)} />)}
-      <LeftSection>{/* <Logo /> */}</LeftSection>
+      <Logo isMobile={isMobile} />
       <MiddleSection>{!isMobile && <NavLinks />}</MiddleSection>
       <RightSection>
         {!isMobile && (

@@ -4,7 +4,7 @@ import { Box } from '@pancakeswap/uikit'
 import Container from '../layout/Container'
 
 const Outer = styled(Box)<{ background?: string }>`
-  background: ${({ background }) => background || '#E5D3B3'};
+  background: ${({ background }) => background || 'transparent'};
 `
 
 const Inner = styled(Container)`

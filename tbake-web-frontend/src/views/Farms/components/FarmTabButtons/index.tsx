@@ -56,11 +56,10 @@ const Wrapper = styled.div`
     padding-left: 12px;
     padding-right: 12px;
     border-color: #964b00;
-    color: white;
+    color: #c3a484;
   }
 
   div {
-    background-color: #c4a484;
     border-color: #964b00;
   }
 

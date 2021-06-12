@@ -49,12 +49,15 @@ const ToggleWrapper = styled.div`
   margin-left: 10px;
 
   div[color='text'] {
-    color: black;
+    color: white;
   }
 
-  .ipImlX {
-    background-color: #964b00;
+  div {
+    div[scale='sm'] {
+      background-color: #964b00;
+    }
   }
+
   ${Text} {
     margin-left: 8px;
   }
@@ -349,10 +352,10 @@ const Farms: React.FC = () => {
     <>
       <PageHeader>
         <Heading as="h1" scale="xxl" color="#964B00" mb="24px">
-          {t('Baking')}
+          {t('BakeryTools')}
         </Heading>
-        <Heading scale="lg" color="text">
-          {t('Bake Liquidity Pool (LP) tokens to earn.')}
+        <Heading as="h1" scale="lg" color="white">
+          {t('TBake your Liquidity Pool (LP) tokens to earn.')}
         </Heading>
       </PageHeader>
       <Page>
@@ -372,7 +375,9 @@ const Farms: React.FC = () => {
           </ViewControls>
           <FilterContainer>
             <LabelWrapper>
-              <Text textTransform="uppercase">{t('Sort by')}</Text>
+              <Text style={{ color: 'white' }} textTransform="uppercase">
+                {t('Sort by')}
+              </Text>
               <Select
                 options={[
                   {
@@ -400,7 +405,9 @@ const Farms: React.FC = () => {
               />
             </LabelWrapper>
             <LabelWrapper style={{ marginLeft: 16 }}>
-              <Text textTransform="uppercase">{t('Search')}</Text>
+              <Text style={{ color: 'white' }} textTransform="uppercase">
+                {t('Search')}
+              </Text>
               <SearchInput onChange={handleChangeQuery} placeholder="Search Farms" />
             </LabelWrapper>
           </FilterContainer>

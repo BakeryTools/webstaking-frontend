@@ -15,11 +15,10 @@ const DropDownHeader = styled.div`
   background: ${({ theme }) => theme.colors.input};
 
   transition: border-radius 0.15s;
-  background-color: #e4d4b3;
   border-color: #964b00;
 
   div {
-    color: #964b00;
+    color: #c3a484;
   }
 `
 
@@ -35,7 +34,6 @@ const DropDownListContainer = styled.div`
   transform-origin: top;
   opacity: 0;
   width: 100%;
-  background-color: #e4d4b3;
   border-color: #964b00;
 
   ${({ theme }) => theme.mediaQueries.sm} {
@@ -100,8 +98,9 @@ const ListItem = styled.li`
     /* background: ${({ theme }) => theme.colors.inputSecondary}; */
     background: #c4a484;
   }
+
   div {
-    color: #964b00;
+    color: #c3a484;
   }
 `
 

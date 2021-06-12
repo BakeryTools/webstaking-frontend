@@ -61,7 +61,9 @@ function NavLinks() {
           <Link href="https://bakerytools.io/hotspot/">Hotspot</Link>
         </LinkItem>
         <LinkItem>
-          <Link style={{color: '#964B00'}} href="/">Farms</Link>
+          <Link style={{ color: '#FE6220' }} href="/">
+            Farms
+          </Link>
         </LinkItem>
         <LinkItem>
           <Link href="/">Chart</Link>

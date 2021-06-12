@@ -50,7 +50,7 @@ const HarvestAction: React.FunctionComponent<HarvestActionProps> = ({ pid, userD
   }, [earningsBusd, updateValue])
 
   return (
-    <ActionContainer>
+    <ActionContainer style={{ border: '2px solid #964B00' }}>
       <ActionTitles>
         <Title>CAKE </Title>
         <Subtle>{t('Earned').toUpperCase()}</Subtle>

@@ -81,7 +81,9 @@ function MobileNavLinks({ isOpen, account, login, logout }: Props) {
             <Link href="/">Hotspot</Link>
           </LinkItem>
           <LinkItem>
-            <Link href="/">Staking</Link>
+            <Link style={{ color: '#FE6220' }} href="/">
+              Farms
+            </Link>
           </LinkItem>
           <LinkItem>
             <Link href="/">Chart</Link>

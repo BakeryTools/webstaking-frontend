@@ -8,7 +8,6 @@ const StyledInput = styled(Input)`
   border-radius: 16px;
   margin-left: auto;
   border: 1px solid #964b00;
-  background-color: #e4d4b3;
   color: #964b00;
 
   ::placeholder {
@@ -31,9 +30,6 @@ const StyledInput = styled(Input)`
 const InputWrapper = styled.div`
   position: relative;
 
-  .cSiPfC:focus:not(:disabled) {
-    box-shadow: 0px 0px 0px 1px #964b00, 0px 0px 0px 4px #e4d4b3;
-  }
   ${({ theme }) => theme.mediaQueries.sm} {
     display: block;
   }
