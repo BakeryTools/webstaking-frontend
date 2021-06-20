@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react'
 import styled from 'styled-components'
-import { Heading, Card, CardBody, Button } from '@pancakeswap-libs/uikit'
+import { Heading, Card, CardBody, Button } from '@evercreative/bakery-tools-uikit'
 import { useWallet } from '@binance-chain/bsc-use-wallet'
 import BigNumber from 'bignumber.js'
 import useI18n from 'hooks/useI18n'
@@ -16,10 +16,11 @@ import useAllEarnings from '../../../hooks/useAllEarnings'
 import { getBalanceNumber } from '../../../utils/formatBalance'
 
 const StyledFarmStakingCard = styled(Card)`
-  background-image: url('/images/egg/2a.png');
-  background-repeat: no-repeat;
-  background-position: top right;
-  min-height: 376px;
+  // background-image: url('/images/egg/2a.png');
+  // background-repeat: no-repeat;
+  // background-position: top right;
+  // min-height: 376px;
+  // background: ${({ theme }) => theme.isDark ? 'rgba(14, 6, 0, 0.8)' : 'rgba(255, 255, 255, 0.8)'};
 `
 
 const Block = styled.div`
@@ -71,14 +72,14 @@ const FarmedStakingCard = () => {
         <Heading size="xl" mb="24px">
           {TranslateString(542, 'Farms & Staking')}
         </Heading>
-        <CardImage src="/images/egg/2.png" alt="cake logo" width={64} height={64} />
+        <CardImage src="/images/logo.png" alt="bake logo" width={48} height={48} />
         <Block>
-          <Label>{TranslateString(544, 'EGG to Harvest')}</Label>
+          <Label>BAKE to Harvest</Label>
           <CakeHarvestBalance earningsSum={earningsSum}/>
           <Label>~${(eggPrice * earningsSum).toFixed(2)}</Label>
         </Block>
         <Block>
-          <Label>{TranslateString(546, 'EGG in Wallet')}</Label>
+          <Label>BAKE in Wallet</Label>
           <CakeWalletBalance cakeBalance={cakeBalance} />
           <Label>~${(eggPrice * cakeBalance).toFixed(2)}</Label>
         </Block>
@@ -91,8 +92,8 @@ const FarmedStakingCard = () => {
               fullWidth
             >
               {pendingTx
-                ? TranslateString(548, 'Collecting EGG')
-                : TranslateString(999, `Harvest all (${balancesWithValue.length})`)}
+                ? 'Collecting BAKE'
+                : `Harvest all (${balancesWithValue.length})`}
             </Button>
           ) : (
             <UnlockButton fullWidth />

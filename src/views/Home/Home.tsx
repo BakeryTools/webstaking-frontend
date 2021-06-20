@@ -1,30 +1,24 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Heading, Text, BaseLayout } from '@pancakeswap-libs/uikit'
+import { Heading, Text, BaseLayout } from '@evercreative/bakery-tools-uikit'
 import useI18n from 'hooks/useI18n'
 import Page from 'components/layout/Page'
 import FarmStakingCard from './components/FarmStakingCard'
-import LotteryCard from './components/LotteryCard'
 import CakeStats from './components/CakeStats'
 import TotalValueLockedCard from './components/TotalValueLockedCard'
 import TwitterCard from './components/TwitterCard'
 
 const Hero = styled.div`
   align-items: center;
-  background-image: url('/images/egg/3.png');
-  background-repeat: no-repeat;
-  background-position: top center;
   display: flex;
   justify-content: center;
   flex-direction: column;
   margin: auto;
   margin-bottom: 32px;
-  padding-top: 116px;
+  padding-top: 16px;
   text-align: center;
 
   ${({ theme }) => theme.mediaQueries.lg} {
-    background-image: url('/images/egg/3.png'), url('/images/egg/3b.png');
-    background-position: left center, right center;
     height: 165px;
     padding-top: 0;
   }
@@ -53,6 +47,19 @@ const Cards = styled(BaseLayout)`
   }
 `
 
+const HomeBgContainer = styled.div`
+  background-image: url('/images/${({ theme }) => theme.isDark ? 'dark-background.png' : 'light-background.png'}');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  right: 0px;
+  left: 0px;
+  z-index: -1;
+`
+
 const Home: React.FC = () => {
   const TranslateString = useI18n()
 
@@ -60,10 +67,11 @@ const Home: React.FC = () => {
     <Page>
       <Hero>
         <Heading as="h1" size="xl" mb="24px" color="secondary">
-          {TranslateString(576, 'Goose Finance')}
+          {TranslateString(576, 'Bakery Tools')}
         </Heading>
         <Text>{TranslateString(578, 'Top 3 best DEFI app on Binance Smart Chain.')}</Text>
       </Hero>
+      <HomeBgContainer />
       <div>
         <Cards>
           <FarmStakingCard />

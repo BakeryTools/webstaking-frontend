@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react'
 import BigNumber from 'bignumber.js'
 import styled, { keyframes } from 'styled-components'
-import { Flex, Text, Skeleton } from '@pancakeswap-libs/uikit'
+import { Flex, Text, Skeleton } from '@evercreative/bakery-tools-uikit'
 import { communityFarms } from 'config/constants'
 import { Farm } from 'state/types'
 import { provider } from 'web3-core'
@@ -127,29 +127,30 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm, removed, cakePrice, bnbPrice,
 
   return (
     <FCard>
-      {farm.tokenSymbol === 'EGG' && <StyledCardAccent />}
+      {/* {farm.tokenSymbol === 'EGG' && <StyledCardAccent />} */}
       <CardHeading
         lpLabel={lpLabel}
         multiplier={farm.multiplier}
         risk={risk}
+        farm={farm}
         depositFee={farm.depositFeeBP}
         farmImage={farmImage}
         tokenSymbol={farm.tokenSymbol}
       />
       {!removed && (
         <Flex justifyContent='space-between' alignItems='center'>
-          <Text>{TranslateString(352, 'APR')}:</Text>
-          <Text bold style={{ display: 'flex', alignItems: 'center' }}>
+          <Text small>{TranslateString(352, 'APR')}:</Text>
+          <Text small style={{ display: 'flex', alignItems: 'center' }}>
             {farm.apy ? (
               <>
-                <ApyButton
+                {/* <ApyButton
                   lpLabel={lpLabel}
                   quoteTokenAdresses={quoteTokenAdresses}
                   quoteTokenSymbol={quoteTokenSymbol}
                   tokenAddresses={tokenAddresses}
                   cakePrice={cakePrice}
                   apy={farm.apy}
-                />
+                /> */}
                 {farmAPY}%
               </>
             ) : (
@@ -159,13 +160,21 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm, removed, cakePrice, bnbPrice,
         </Flex>
       )}
       <Flex justifyContent='space-between'>
-        <Text>{TranslateString(318, 'Earn')}:</Text>
-        <Text bold>{earnLabel}</Text>
+        <Text small>Stake:</Text>
+        <Text small>{farm.quoteTokenSymbol}</Text>
       </Flex>
       <Flex justifyContent='space-between'>
+        <Text small>{TranslateString(318, 'Earn')}:</Text>
+        <Text small>{earnLabel}</Text>
+      </Flex>
+      <Flex justifyContent='space-between'>
+        <Text small>Reward Pool:</Text>
+        <Text small>523.99</Text>
+      </Flex>
+      {/* <Flex justifyContent='space-between'>
         <Text style={{ fontSize: '24px' }}>{TranslateString(10001, 'Deposit Fee')}:</Text>
         <Text bold style={{ fontSize: '24px' }}>{(farm.depositFeeBP / 100)}%</Text>
-      </Flex>
+      </Flex> */}
       <CardActionsContainer farm={farm} ethereum={ethereum} account={account} />
       <Divider />
       <ExpandableSectionButton

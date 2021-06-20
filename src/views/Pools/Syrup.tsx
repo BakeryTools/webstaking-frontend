@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Route, useRouteMatch } from 'react-router-dom'
 import BigNumber from 'bignumber.js'
 import styled from 'styled-components'
+import { provider } from 'web3-core'
 import { useWallet } from '@binance-chain/bsc-use-wallet'
-import { Heading } from '@pancakeswap-libs/uikit'
+import { Input } from '@evercreative/bakery-tools-uikit'
 import { BLOCKS_PER_YEAR } from 'config'
 import orderBy from 'lodash/orderBy'
 import partition from 'lodash/partition'
@@ -22,11 +23,12 @@ import Divider from './components/Divider'
 const Farm: React.FC = () => {
   const { path } = useRouteMatch()
   const TranslateString = useI18n()
-  const { account } = useWallet()
   const farms = useFarms()
+  const { account, ethereum }: { account: string; ethereum: provider } = useWallet()
   const pools = usePools(account)
   const bnbPriceUSD = usePriceBnbBusd()
   const block = useBlock()
+  const [searchTerm, setSearchTerm] = useState('');
 
   const priceToBnb = (tokenName: string, tokenPrice: BigNumber, quoteToken: QuoteToken): BigNumber => {
     const tokenPriceBN = new BigNumber(tokenPrice)
@@ -63,37 +65,35 @@ const Farm: React.FC = () => {
     }
   })
 
+  const handleChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
+    const { value: inputValue } = evt.target
+    setSearchTerm(inputValue)
+  }
+
   const [finishedPools, openPools] = partition(poolsWithApy, (pool) => pool.isFinished)
 
   return (
     <Page>
-      <Hero>
-        <div>
-          <Heading as="h1" size="xxl" mb="16px">
-            {TranslateString(282, 'SYRUP Pool')}
-          </Heading>
-          <ul>
-            <li>{TranslateString(580, 'Stake CAKE to earn new tokens.')}</li>
-            <li>{TranslateString(404, 'You can unstake at any time.')}</li>
-            <li>{TranslateString(406, 'Rewards are calculated per block.')}</li>
-          </ul>
-        </div>
-        <img src="/images/syrup.png" alt="SYRUP POOL icon" width={410} height={191} />
-      </Hero>
-      <PoolTabButtons />
-      <Divider />
+      {/* <PoolTabButtons />
+      <Divider /> */}
+      <HomeBgContainer />
+      <SearchInput
+        onChange={handleChange}
+        placeholder="Search token..."
+        value={searchTerm}
+      />
       <FlexLayout>
         <Route exact path={`${path}`}>
           <>
             {orderBy(openPools, ['sortOrder']).map((pool) => (
-              <PoolCard key={pool.sousId} pool={pool} />
+              <PoolCard key={pool.sousId} pool={pool} ethereum={ethereum} />
             ))}
-            <Coming />
+            {/* <Coming /> */}
           </>
         </Route>
         <Route path={`${path}/history`}>
           {orderBy(finishedPools, ['sortOrder']).map((pool) => (
-            <PoolCard key={pool.sousId} pool={pool} />
+            <PoolCard key={pool.sousId} pool={pool} ethereum={ethereum} />
           ))}
         </Route>
       </FlexLayout>
@@ -130,5 +130,31 @@ const Hero = styled.div`
     max-width: none;
   }
 `
+
+const HomeBgContainer = styled.div`
+  background-image: url('/images/${({ theme }) => theme.isDark ? 'dark-background.png' : 'light-background.png'}');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  right: 0px;
+  left: 0px;
+  z-index: -1;
+`;
+
+const SearchInput = styled(Input)`
+  background: ${({ theme }) => theme.isDark ? 'rgba(229, 229, 229, 0.11)' : 'rgba(255,255,255,0.9)'};
+  margin-bottom: 2rem;
+
+  &:focus {
+    box-shadow: none !important;
+  }
+
+  ${({ theme }) => theme.mediaQueries.sm} {
+    margin-bottom: 5rem;
+  }
+`;
 
 export default Farm

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card, CardBody, Heading, Text } from '@pancakeswap-libs/uikit'
+import { Card, CardBody, Heading, Text } from '@evercreative/bakery-tools-uikit'
 import BigNumber from 'bignumber.js/bignumber'
 import styled from 'styled-components'
 import { getBalanceNumber } from 'utils/formatBalance'
@@ -41,7 +41,7 @@ const CakeStats = () => {
     <StyledCakeStats>
       <CardBody>
         <Heading size="xl" mb="24px">
-          {TranslateString(534, 'Egg Stats')}
+          Bake Stats
         </Heading>
         <Row>
           <Text fontSize="14px">{TranslateString(10005, 'Market Cap')}</Text>
@@ -60,7 +60,7 @@ const CakeStats = () => {
           {cakeSupply && <CardValue fontSize="14px" value={cakeSupply} decimals={0} />}
         </Row>
         <Row>
-          <Text fontSize="14px">{TranslateString(540, 'New EGG/block')}</Text>
+          <Text fontSize="14px">New BAKE/block</Text>
           <Text bold fontSize="14px">{eggPerBlock}</Text>
         </Row>
       </CardBody>

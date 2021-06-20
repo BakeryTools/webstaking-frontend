@@ -4,8 +4,8 @@ import { allLanguages } from 'config/localisation/languageCodes'
 import { LanguageContext } from 'contexts/Localisation/languageContext'
 import useTheme from 'hooks/useTheme'
 import { usePriceCakeBusd } from 'state/hooks'
-import { Menu as UikitMenu } from '@pancakeswap-libs/uikit'
-import config from './config'
+import { Menu as UikitMenu } from '@evercreative/bakery-tools-uikit'
+import config, { socials } from './config'
 
 const Menu = (props) => {
   const { account, connect, reset } = useWallet()
@@ -25,6 +25,7 @@ const Menu = (props) => {
       setLang={setSelectedLanguage}
       cakePriceUsd={cakePriceUsd.toNumber()}
       links={config}
+      socials={socials}
       priceLink="https://www.coingecko.com/en/coins/goose-finance"
       {...props}
     />

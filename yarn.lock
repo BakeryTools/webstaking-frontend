@@ -1562,6 +1562,17 @@
     "@ethersproject/properties" "^5.0.3"
     "@ethersproject/strings" "^5.0.4"
 
+"@evercreative/bakery-tools-uikit@^1.0.12":
+  version "1.0.12"
+  resolved "https://registry.yarnpkg.com/@evercreative/bakery-tools-uikit/-/bakery-tools-uikit-1.0.12.tgz#beb357df491affdea3659e8eb7be896387ce3848"
+  integrity sha512-oWtWZnqqhgypwTqpeo9gV7b5HK+2Yp1y1CPWDbHK01JUjZLxwE8XBIUumKbktXEkbrm4QPBCl/o6zHtnMFFAPw==
+  dependencies:
+    "@types/lodash" "^4.14.162"
+    "@types/styled-system" "^5.1.10"
+    lodash "^4.17.20"
+    react-transition-group "^4.4.1"
+    styled-system "^5.1.5"
+
 "@hapi/address@2.x.x":
   version "2.1.4"
   resolved "https://registry.yarnpkg.com/@hapi/address/-/address-2.1.4.tgz#5d67ed43f3fd41a69d4b9ff7b56e7c0d1d0a81e5"
@@ -1827,16 +1838,6 @@
     eslint-plugin-jsx-a11y "^6.4.1"
     eslint-plugin-react "^7.21.5"
     eslint-plugin-react-hooks "^4.0.0"
-
-"@pancakeswap-libs/uikit@goosedefi/goose-uikit":
-  version "0.10.2"
-  resolved "https://codeload.github.com/goosedefi/goose-uikit/tar.gz/068e017bb0f927c566a43596fb555a5818e13154"
-  dependencies:
-    "@types/lodash" "^4.14.162"
-    "@types/styled-system" "^5.1.10"
-    lodash "^4.17.20"
-    react-transition-group "^4.4.1"
-    styled-system "^5.1.5"
 
 "@pedrouid/iso-crypto@^1.0.0":
   version "1.0.0"

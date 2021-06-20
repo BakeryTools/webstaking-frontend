@@ -1,11 +1,12 @@
 import React, { useEffect, useCallback, useState } from 'react'
 import { Route, useRouteMatch } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
+import styled from 'styled-components';
 import BigNumber from 'bignumber.js'
 import { useWallet } from '@binance-chain/bsc-use-wallet'
 import { provider } from 'web3-core'
-import { Image, Heading } from '@pancakeswap-libs/uikit'
-import { BLOCKS_PER_YEAR, CAKE_PER_BLOCK, CAKE_POOL_PID } from 'config'
+import { Input } from '@evercreative/bakery-tools-uikit'
+import { BLOCKS_PER_YEAR } from 'config'
 import FlexLayout from 'components/layout/Flex'
 import Page from 'components/layout/Page'
 import { useFarms, usePriceBnbBusd, usePriceCakeBusd } from 'state/hooks'
@@ -21,6 +22,28 @@ export interface FarmsProps{
   tokenMode?: boolean
 }
 
+const HomeBgContainer = styled.div`
+  background-image: url('/images/${({ theme }) => theme.isDark ? 'dark-background.png' : 'light-background.png'}');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  right: 0px;
+  left: 0px;
+  z-index: -1;
+`;
+
+const SearchInput = styled(Input)`
+  background: ${({ theme }) => theme.isDark ? 'rgba(229, 229, 229, 0.11)' : 'rgba(255,255,255,0.9)'};
+  margin-bottom: 5rem;
+
+  &:focus {
+    box-shadow: none !important;
+  }
+`;
+    
 const Farms: React.FC<FarmsProps> = (farmsProps) => {
   const { path } = useRouteMatch()
   const TranslateString = useI18n()
@@ -29,6 +52,7 @@ const Farms: React.FC<FarmsProps> = (farmsProps) => {
   const bnbPrice = usePriceBnbBusd()
   const { account, ethereum }: { account: string; ethereum: provider } = useWallet()
   const {tokenMode} = farmsProps;
+  const [searchTerm, setSearchTerm] = useState('');
 
   const dispatch = useDispatch()
   const { fastRefresh } = useRefresh()
@@ -89,22 +113,30 @@ const Farms: React.FC<FarmsProps> = (farmsProps) => {
     [bnbPrice, account, cakePrice, ethereum],
   )
 
+  const handleChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
+    const { value: inputValue } = evt.target
+    setSearchTerm(inputValue)
+  }
+
   return (
     <Page>
-      <Heading as="h1" size="lg" color="primary" mb="50px" style={{ textAlign: 'center' }}>
-        {
-          tokenMode ?
-            TranslateString(10002, 'Stake tokens to earn EGG')
-            :
-          TranslateString(320, 'Stake LP tokens to earn EGG')
+      {/* <Heading as="h1" size="lg" color="primary" mb="50px" style={{ textAlign: 'center' }}>
+        {tokenMode ? 'Stake tokens to earn BAKE'
+          : 'Stake LP tokens to earn BAKE'
         }
       </Heading>
       <Heading as="h2" color="secondary" mb="50px" style={{ textAlign: 'center' }}>
-        {TranslateString(10000, 'Deposit Fee will be used to buyback EGG')}
+        Deposit Fee will be used to buyback BAKE
       </Heading>
-      <FarmTabButtons stakedOnly={stakedOnly} setStakedOnly={setStakedOnly}/>
+      <FarmTabButtons stakedOnly={stakedOnly} setStakedOnly={setStakedOnly}/> */}
+      <HomeBgContainer />
       <div>
-        <Divider />
+        <SearchInput
+          onChange={handleChange}
+          placeholder="Search token..."
+          value={searchTerm}
+        />
+        {/* <Divider /> */}
         <FlexLayout>
           <Route exact path={`${path}`}>
             {stakedOnly ? farmsList(stakedOnlyFarms, false) : farmsList(activeFarms, false)}
@@ -114,7 +146,6 @@ const Farms: React.FC<FarmsProps> = (farmsProps) => {
           </Route>
         </FlexLayout>
       </div>
-      <Image src="/images/egg/8.png" alt="illustration" width={1352} height={587} responsive />
     </Page>
   )
 }
