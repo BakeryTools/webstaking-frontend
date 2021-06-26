@@ -47,7 +47,7 @@ export interface FarmConfig {
   tokenSymbol: string
   tokenAddresses: Address
   quoteTokenSymbol: QuoteToken
-  quoteTokenAdresses: Address
+  quoteTokenAddresses: Address
   multiplier?: string
   isTokenOnly?: boolean
   isCommunity?: boolean

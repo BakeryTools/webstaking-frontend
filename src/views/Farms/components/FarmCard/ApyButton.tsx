@@ -8,14 +8,14 @@ export interface ApyButtonProps {
   lpLabel?: string
   cakePrice?: BigNumber
   apy?: BigNumber
-  quoteTokenAdresses?: Address
+  quoteTokenAddresses?: Address
   quoteTokenSymbol?: string
   tokenAddresses: Address
 }
 
 const ApyButton: React.FC<ApyButtonProps> = ({
   lpLabel,
-  quoteTokenAdresses,
+  quoteTokenAddresses,
   quoteTokenSymbol,
   tokenAddresses,
   cakePrice,
@@ -24,7 +24,7 @@ const ApyButton: React.FC<ApyButtonProps> = ({
   const [onPresentApyModal] = useModal(
     <ApyCalculatorModal
       lpLabel={lpLabel}
-      quoteTokenAdresses={quoteTokenAdresses}
+      quoteTokenAddresses={quoteTokenAddresses}
       quoteTokenSymbol={quoteTokenSymbol}
       tokenAddresses={tokenAddresses}
       cakePrice={cakePrice}

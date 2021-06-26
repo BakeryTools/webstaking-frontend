@@ -16,11 +16,6 @@ import useAllEarnings from '../../../hooks/useAllEarnings'
 import { getBalanceNumber } from '../../../utils/formatBalance'
 
 const StyledFarmStakingCard = styled(Card)`
-  // background-image: url('/images/egg/2a.png');
-  // background-repeat: no-repeat;
-  // background-position: top right;
-  // min-height: 376px;
-  // background: ${({ theme }) => theme.isDark ? 'rgba(14, 6, 0, 0.8)' : 'rgba(255, 255, 255, 0.8)'};
 `
 
 const Block = styled.div`
@@ -46,7 +41,7 @@ const FarmedStakingCard = () => {
   const TranslateString = useI18n()
   const farmsWithBalance = useFarmsWithBalance()
   const cakeBalance = getBalanceNumber(useTokenBalance(getCakeAddress()))
-  const eggPrice = usePriceCakeBusd().toNumber()
+  const tbakePrice = usePriceCakeBusd().toNumber()
   const allEarnings = useAllEarnings()
   const earningsSum = allEarnings.reduce((accum, earning) => {
     return accum + new BigNumber(earning).div(new BigNumber(10).pow(18)).toNumber()
@@ -74,14 +69,14 @@ const FarmedStakingCard = () => {
         </Heading>
         <CardImage src="/images/logo.png" alt="bake logo" width={48} height={48} />
         <Block>
-          <Label>BAKE to Harvest</Label>
+          <Label>TBAKE to Harvest</Label>
           <CakeHarvestBalance earningsSum={earningsSum}/>
-          <Label>~${(eggPrice * earningsSum).toFixed(2)}</Label>
+          <Label>~${(tbakePrice * earningsSum).toFixed(2)}</Label>
         </Block>
         <Block>
-          <Label>BAKE in Wallet</Label>
+          <Label>TBAKE in Wallet</Label>
           <CakeWalletBalance cakeBalance={cakeBalance} />
-          <Label>~${(eggPrice * cakeBalance).toFixed(2)}</Label>
+          <Label>~${(tbakePrice * cakeBalance).toFixed(2)}</Label>
         </Block>
         <Actions>
           {account ? (
@@ -92,7 +87,7 @@ const FarmedStakingCard = () => {
               fullWidth
             >
               {pendingTx
-                ? 'Collecting BAKE'
+                ? 'Collecting TBAKE'
                 : `Harvest all (${balancesWithValue.length})`}
             </Button>
           ) : (

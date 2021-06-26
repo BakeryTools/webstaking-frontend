@@ -12,19 +12,19 @@ const config: MenuEntry[] = [
     items: [
       {
         label: 'Exchange',
-        href: 'https://exchange.goosedefi.com/',
+        href: 'https://exchange.pancakeswap.finance/#swap?outputCurrency=0x26d6e280f9687c463420908740ae59f712419147'
       },
       {
         label: 'Liquidity',
-        href: 'https://exchange.goosedefi.com/#/pool',
+        href: 'https://exchange.pancakeswap.finance/#/pool?outputCurrency=0x26d6e280f9687c463420908740ae59f712419147',
       },
     ],
   },
-  // {
-  //   label: 'Farms',
-  //   icon: 'FarmIcon',
-  //   href: '/farms',
-  // },
+  {
+    label: 'Farms',
+    icon: 'FarmIcon',
+    href: '/farms',
+  },
   // {
   //   label: 'Nests',
   //   icon: 'PoolIcon',

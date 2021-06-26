@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback, useState } from 'react'
+import React, { useEffect, useCallback, useState, useMemo } from 'react'
 import { Route, useRouteMatch } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import styled from 'styled-components';
@@ -13,10 +13,7 @@ import { useFarms, usePriceBnbBusd, usePriceCakeBusd } from 'state/hooks'
 import useRefresh from 'hooks/useRefresh'
 import { fetchFarmUserDataAsync } from 'state/actions'
 import { QuoteToken } from 'config/constants/types'
-import useI18n from 'hooks/useI18n'
 import FarmCard, { FarmWithStakedValue } from './components/FarmCard/FarmCard'
-import FarmTabButtons from './components/FarmTabButtons'
-import Divider from './components/Divider'
 
 export interface FarmsProps{
   tokenMode?: boolean
@@ -37,16 +34,20 @@ const HomeBgContainer = styled.div`
 
 const SearchInput = styled(Input)`
   background: ${({ theme }) => theme.isDark ? 'rgba(229, 229, 229, 0.11)' : 'rgba(255,255,255,0.9)'};
-  margin-bottom: 5rem;
+  margin-bottom: 3rem;
+  margin-top: 1rem;
 
   &:focus {
     box-shadow: none !important;
+  }
+
+  ${({ theme }) => theme.mediaQueries.sm} {
+    margin-bottom: 5rem;
   }
 `;
     
 const Farms: React.FC<FarmsProps> = (farmsProps) => {
   const { path } = useRouteMatch()
-  const TranslateString = useI18n()
   const farmsLP = useFarms()
   const cakePrice = usePriceCakeBusd()
   const bnbPrice = usePriceBnbBusd()
@@ -62,14 +63,30 @@ const Farms: React.FC<FarmsProps> = (farmsProps) => {
     }
   }, [account, dispatch, fastRefresh])
 
-  const [stakedOnly, setStakedOnly] = useState(false)
+  const [stakedOnly] = useState(false)
 
-  const activeFarms = farmsLP.filter((farm) => !!farm.isTokenOnly === !!tokenMode && farm.multiplier !== '0X')
-  const inactiveFarms = farmsLP.filter((farm) => !!farm.isTokenOnly === !!tokenMode && farm.multiplier === '0X')
+  // const activeFarms = farmsLP.filter((farm) => !!farm.isTokenOnly === !!tokenMode && farm.multiplier !== '0X')
+  // const inactiveFarms = farmsLP.filter((farm) => !!farm.isTokenOnly === !!tokenMode && farm.multiplier === '0X')
 
-  const stakedOnlyFarms = activeFarms.filter(
-    (farm) => farm.userData && new BigNumber(farm.userData.stakedBalance).isGreaterThan(0),
-  )
+  // const stakedOnlyFarms = activeFarms.filter(
+  //   (farm) => farm.userData && new BigNumber(farm.userData.stakedBalance).isGreaterThan(0),
+  // )
+
+  const { activeFarms, inactiveFarms, stakedOnlyFarms } = useMemo(() => {
+    const filteredFarms = farmsLP.filter(farm => farm.lpSymbol.toLowerCase().includes(searchTerm.toLowerCase()));
+    const activeFarmList = filteredFarms.filter((farm) => !!farm.isTokenOnly === !!tokenMode && farm.multiplier !== '0X')
+    const inactiveFarmList = filteredFarms.filter((farm) => !!farm.isTokenOnly === !!tokenMode && farm.multiplier === '0X')
+
+    const stakedOnlyFarmList = activeFarmList.filter(
+      (farm) => farm.userData && new BigNumber(farm.userData.stakedBalance).isGreaterThan(0),
+    )
+
+    return { 
+      activeFarms: activeFarmList, 
+      inactiveFarms: inactiveFarmList, 
+      stakedOnlyFarms: stakedOnlyFarmList 
+    };
+  }, [searchTerm, tokenMode, farmsLP]);
 
   // /!\ This function will be removed soon
   // This function compute the APY for each farm and will be replaced when we have a reliable API
@@ -81,7 +98,7 @@ const Farms: React.FC<FarmsProps> = (farmsProps) => {
         // if (!farm.tokenAmount || !farm.lpTotalInQuoteToken || !farm.lpTotalInQuoteToken) {
         //   return farm
         // }
-        const cakeRewardPerBlock = new BigNumber(farm.eggPerBlock || 1).times(new BigNumber(farm.poolWeight)) .div(new BigNumber(10).pow(18))
+        const cakeRewardPerBlock = new BigNumber(farm.tbakePerBlock || 1).times(new BigNumber(farm.poolWeight)) .div(new BigNumber(10).pow(18))
         const cakeRewardPerYear = cakeRewardPerBlock.times(BLOCKS_PER_YEAR)
 
         let apy = cakePrice.times(cakeRewardPerYear);

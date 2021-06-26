@@ -1562,10 +1562,10 @@
     "@ethersproject/properties" "^5.0.3"
     "@ethersproject/strings" "^5.0.4"
 
-"@evercreative/bakery-tools-uikit@^1.0.12":
-  version "1.0.12"
-  resolved "https://registry.yarnpkg.com/@evercreative/bakery-tools-uikit/-/bakery-tools-uikit-1.0.12.tgz#beb357df491affdea3659e8eb7be896387ce3848"
-  integrity sha512-oWtWZnqqhgypwTqpeo9gV7b5HK+2Yp1y1CPWDbHK01JUjZLxwE8XBIUumKbktXEkbrm4QPBCl/o6zHtnMFFAPw==
+"@evercreative/bakery-tools-uikit@^1.0.13":
+  version "1.0.13"
+  resolved "https://registry.yarnpkg.com/@evercreative/bakery-tools-uikit/-/bakery-tools-uikit-1.0.13.tgz#b3aa1cbc61b82db9d2d1ce6a6dcdc736688522f0"
+  integrity sha512-V4IwTqRrUvV2bPjjV/xIQwUzyPszqUVOAnaxfNCi2SPshH/31vYx+wTpgB+4R0aaknLUGHz3zxrQ7bcpHTzPNw==
   dependencies:
     "@types/lodash" "^4.14.162"
     "@types/styled-system" "^5.1.10"

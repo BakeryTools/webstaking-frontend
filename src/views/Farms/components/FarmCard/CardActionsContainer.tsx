@@ -5,7 +5,7 @@ import { provider } from 'web3-core'
 import { getContract } from 'utils/erc20'
 import { Button, Flex, Text } from '@evercreative/bakery-tools-uikit'
 import { Farm } from 'state/types'
-import { useFarmFromPid, useFarmFromSymbol, useFarmUser } from 'state/hooks'
+import { useFarmFromPid, useFarmUser } from 'state/hooks'
 import useI18n from 'hooks/useI18n'
 import UnlockButton from 'components/UnlockButton'
 import { useApprove } from 'hooks/useApprove'
@@ -33,7 +33,7 @@ const CardActions: React.FC<FarmCardActionsProps> = ({ farm, ethereum, account }
   const lpAddress = lpAddresses[process.env.REACT_APP_CHAIN_ID]
   const tokenAddress = tokenAddresses[process.env.REACT_APP_CHAIN_ID];
   const lpName = farm.lpSymbol.toUpperCase()
-  const isApproved = account && allowance && allowance.isGreaterThan(0)
+  const isApproved = account && allowance && allowance.isGreaterThan(0);
 
   const lpContract = useMemo(() => {
     if(isTokenOnly){
@@ -58,7 +58,7 @@ const CardActions: React.FC<FarmCardActionsProps> = ({ farm, ethereum, account }
     return isApproved ? (
       <StakeAction stakedBalance={stakedBalance} tokenBalance={tokenBalance} tokenName={lpName} pid={pid} depositFeeBP={depositFeeBP} />
     ) : (
-      <Button variant='secondary' mt="8px" fullWidth disabled={requestedApproval} onClick={handleApprove}>
+      <Button size='sm' variant='secondary' mt="8px" fullWidth disabled={requestedApproval} onClick={handleApprove}>
         {TranslateString(999, 'Approve Contract')}
       </Button>
     )
@@ -69,14 +69,15 @@ const CardActions: React.FC<FarmCardActionsProps> = ({ farm, ethereum, account }
       <Flex>
         <Text bold textTransform="uppercase" color="primary" fontSize="12px" pr="3px">
           {/* TODO: Is there a way to get a dynamic value here from useFarmFromSymbol? */}
-          EGG
+          {/* EGG */}
+          TBAKE
         </Text>
         <Text bold textTransform="uppercase" color="textSubtle" fontSize="12px">
           {TranslateString(999, 'Earned')}
         </Text>
       </Flex>
       <HarvestAction earnings={earnings} pid={pid} />
-      <Flex>
+      <Flex mb='16px'>
         <Text bold textTransform="uppercase" color="primary" fontSize="12px" pr="3px">
           {lpName}
         </Text>
@@ -84,7 +85,7 @@ const CardActions: React.FC<FarmCardActionsProps> = ({ farm, ethereum, account }
           {TranslateString(999, 'Staked')}
         </Text>
       </Flex>
-      {!account ? <UnlockButton variant='secondary' mt="8px" fullWidth /> : renderApprovalOrStakeButton()}
+      {!account ? <UnlockButton size='sm' variant='secondary' mt="8px" fullWidth /> : renderApprovalOrStakeButton()}
     </Action>
   )
 }

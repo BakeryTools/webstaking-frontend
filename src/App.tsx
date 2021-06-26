@@ -7,14 +7,14 @@ import { useFetchPublicData } from 'state/hooks'
 import GlobalStyle from './style/Global'
 import Menu from './components/Menu'
 import PageLoader from './components/PageLoader'
-import NftGlobalNotification from './views/Nft/components/NftGlobalNotification'
+// import NftGlobalNotification from './views/Nft/components/NftGlobalNotification'
 
 // Route-based code splitting
 // Only pool is included in the main bundle because of it's the most visited page'
 const Home = lazy(() => import('./views/Home'))
-// const Farms = lazy(() => import('./views/Farms'))
+const Farms = lazy(() => import('./views/Farms'))
 // const Lottery = lazy(() => import('./views/Lottery'))
-const Pools = lazy(() => import('./views/Pools'))
+// const Pools = lazy(() => import('./views/Pools'))
 // const Ifos = lazy(() => import('./views/Ifos'))
 const NotFound = lazy(() => import('./views/NotFound'))
 // const Nft = lazy(() => import('./views/Nft'))
@@ -45,14 +45,14 @@ const App: React.FC = () => {
             <Route path="/" exact>
               <Home />
             </Route>
-            {/* <Route path="/farms">
+            <Route path="/farms">
               <Farms />
             </Route>
-            <Route path="/nests">
-              <Farms tokenMode/>
+            {/* <Route path="/nests">
             </Route> */}
             <Route path="/pools">
-             <Pools />
+              <Farms tokenMode />
+             {/* <Pools /> */}
             </Route>
             {/* <Route path="/lottery"> */}
             {/*  <Lottery /> */}
@@ -75,7 +75,7 @@ const App: React.FC = () => {
           </Switch>
         </Suspense>
       </Menu>
-      <NftGlobalNotification />
+      {/* <NftGlobalNotification /> */}
     </Router>
   )
 }

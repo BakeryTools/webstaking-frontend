@@ -1,8 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import BigNumber from 'bignumber.js'
-import { Tag, Flex, Heading, Image, Text } from '@evercreative/bakery-tools-uikit'
-import { CommunityTag, CoreTag, NoFeeTag, RiskTag } from 'components/Tags'
+import { Flex, Image, Text } from '@evercreative/bakery-tools-uikit'
 import { Farm } from 'state/types'
 
 interface FarmWithStakedValue extends Farm {
@@ -28,10 +27,6 @@ const TokenSymbolLabel = styled(Text)`
   line-height: 1.2;
 `;
 
-const MultiplierTag = styled(Tag)`
-  margin-left: 4px;
-`
-
 const FarmImageWrapper = styled.div`
   display: flex;
   justify-content: space-between;
@@ -42,28 +37,24 @@ const FarmImageWrapper = styled.div`
 `;
 
 const CardHeading: React.FC<ExpandableSectionProps> = ({
-  lpLabel,
-  multiplier,
-  risk,
-  farm,
-  farmImage,
-  tokenSymbol,
-  depositFee,
+  farm
 }) => {
   return (
-    <Wrapper justifyContent="space-between" alignItems="center" mb="12px">
+    <Wrapper justifyContent="space-between" alignItems="center" mb="24px">
       <FarmImageWrapper>
         <Image src={`/images/farms/${farm.tokenSymbol}.png`} alt={farm.tokenSymbol} width={36} height={36} />
         <Image src={`/images/farms/${farm.quoteTokenSymbol}.png`} alt={farm.quoteTokenSymbol} width={36} height={36} />
       </FarmImageWrapper>
       <Flex flexDirection="column" alignItems="flex-end">
-        <TokenSymbolLabel color='primary' fontSize='18px' >{farm.quoteTokenSymbol}</TokenSymbolLabel>
-        <TokenSymbolLabel fontSize='18px'>{farm.tokenSymbol}</TokenSymbolLabel>
-        {/* <Heading mb="4px">{lpLabel}</Heading> */}
-        {/* <Flex justifyContent="center">
-          {depositFee === 0 ? <NoFeeTag /> : null}
-          <MultiplierTag variant="secondary">{multiplier}</MultiplierTag>
-        </Flex> */}
+        {farm.isTokenOnly ?
+          <>
+            <TokenSymbolLabel color='primary' fontSize='18px' >{farm.lpSymbol}</TokenSymbolLabel>
+            <TokenSymbolLabel fontSize='18px'>{farm.tokenSymbol}</TokenSymbolLabel>
+            
+          </>
+          : 
+          <TokenSymbolLabel color='primary' fontSize='18px' >{farm.lpSymbol}</TokenSymbolLabel>
+        }
       </Flex>
     </Wrapper>
   )
