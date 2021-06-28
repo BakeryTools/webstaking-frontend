@@ -27,11 +27,11 @@ const TokenSymbolLabel = styled(Text)`
   line-height: 1.2;
 `;
 
-const FarmImageWrapper = styled.div`
+const FarmImageWrapper = styled.div<{ isTokenOnly: boolean }>`
   display: flex;
   justify-content: space-between;
   padding: 0.5rem 0.75rem;
-  width: 7.5rem;
+  width: ${({ isTokenOnly }) => isTokenOnly ? '4rem' : '7.5rem'};
   border: 2px solid ${({ theme }) => theme.colors.primary};
   border-radius: 80px;
 `;
@@ -41,9 +41,11 @@ const CardHeading: React.FC<ExpandableSectionProps> = ({
 }) => {
   return (
     <Wrapper justifyContent="space-between" alignItems="center" mb="24px">
-      <FarmImageWrapper>
+      <FarmImageWrapper isTokenOnly={farm.isTokenOnly}>
         <Image src={`/images/farms/${farm.tokenSymbol}.png`} alt={farm.tokenSymbol} width={36} height={36} />
-        <Image src={`/images/farms/${farm.quoteTokenSymbol}.png`} alt={farm.quoteTokenSymbol} width={36} height={36} />
+        {!farm.isTokenOnly && 
+          <Image src={`/images/farms/${farm.quoteTokenSymbol}.png`} alt={farm.quoteTokenSymbol} width={36} height={36} />
+        }
       </FarmImageWrapper>
       <Flex flexDirection="column" alignItems="flex-end">
         {farm.isTokenOnly ?
