@@ -6,8 +6,10 @@ import { Farm } from 'state/types'
 import { provider } from 'web3-core'
 import useI18n from 'hooks/useI18n'
 import { QuoteToken } from 'config/constants/types'
+import { useFarmUser } from 'state/hooks';
 import CardHeading from './CardHeading'
 import CardActionsContainer from './CardActionsContainer'
+import TimeCount from './TimeCount';
 
 export interface FarmWithStakedValue extends Farm {
   apy?: BigNumber
@@ -37,6 +39,7 @@ interface FarmCardProps {
 
 const FarmCard: React.FC<FarmCardProps> = ({ farm, removed, cakePrice, bnbPrice, ethereum, account }) => {
   const TranslateString = useI18n()
+  const { stakedBalance, depositedAt } = useFarmUser(farm.pid);
 
   // const isCommunityFarm = communityFarms.includes(farm.tokenSymbol)
   // We assume the token name is coin pair + lp e.g. CAKE-BNB LP, LINK-BNB LP,
@@ -117,6 +120,9 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm, removed, cakePrice, bnbPrice,
         <Text small>{TranslateString(318, 'Earn')}:</Text>
         <Text small>{earnLabel}</Text>
       </Flex>
+
+      <TimeCount depositedAt={depositedAt} stakedBalance={stakedBalance} />
+
       {/* <Flex justifyContent='space-between' mb='16px'>
         <Text small>Reward Pool:</Text>
         <Text small>523.99</Text>

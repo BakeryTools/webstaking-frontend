@@ -13,7 +13,8 @@ export interface Farm extends FarmConfig {
     allowance: BigNumber
     tokenBalance: BigNumber
     stakedBalance: BigNumber
-    earnings: BigNumber
+    earnings: BigNumber,
+    depositedAt : BigNumber
   }
 }
 

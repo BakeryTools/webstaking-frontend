@@ -20,15 +20,15 @@ const TimeCount: React.FC<FarmCardActionsProps> = ({ depositedAt, stakedBalance 
     if (!completed) {
       return (
         <div>
-          <Text bold fontSize='14px' color='#41F3CB' ml='32px' >
+          <Text fontSize='14px' ml='32px' >
             0.5 % fee after 3 days
           </Text>
-          <Text bold fontSize='14px' color='#41F3CB' ml='32px' >
+          <Text fontSize='14px' ml='32px' >
             {`${addZeroTime(hours + (days * 24))}  : `}
             {`${addZeroTime(minutes)} : `}
             {`${addZeroTime(seconds)} left`}
           </Text>
-          <Text bold fontSize='14px' color='#41F3CB' ml='32px' >
+          <Text fontSize='14px' ml='32px' >
             2 % fee before 3 days
           </Text>
         </div>
@@ -47,7 +47,7 @@ const TimeCount: React.FC<FarmCardActionsProps> = ({ depositedAt, stakedBalance 
             zeroPadTime={3}
           />
         </Flex>
-        : null}
+      : null}
     </>
   )
 }

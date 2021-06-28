@@ -74,3 +74,21 @@ export const fetchFarmUserEarnings = async (account: string) => {
   })
   return parsedEarnings
 }
+
+export const fetchFarmUserDepositedAt  = async (account: string) => {
+  const masterChefAdress = getMasterChefAddress()
+
+  const calls = farmsConfig.map((farm) => {
+    return {
+      address: masterChefAdress,
+      name: 'userInfo',
+      params: [farm.pid, account],
+    }
+  })
+
+  const depositedAtTimes = await multicall(masterchefABI, calls)
+  const depositedAtTime = depositedAtTimes.map((depositedAt) => {
+    return new BigNumber(depositedAt.depositedAt._hex).toJSON()
+  })
+  return depositedAtTime
+}
