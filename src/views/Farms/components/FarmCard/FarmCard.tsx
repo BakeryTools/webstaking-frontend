@@ -113,14 +113,14 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm, removed, cakePrice, bnbPrice,
         <Text small>Stake:</Text>
         <Text small>{farm.lpSymbol}</Text>
       </Flex>
-      <Flex justifyContent='space-between'>
+      <Flex justifyContent='space-between' mb='8px'>
         <Text small>{TranslateString(318, 'Earn')}:</Text>
         <Text small>{earnLabel}</Text>
       </Flex>
-      <Flex justifyContent='space-between' mb='16px'>
+      {/* <Flex justifyContent='space-between' mb='16px'>
         <Text small>Reward Pool:</Text>
         <Text small>523.99</Text>
-      </Flex>
+      </Flex> */}
       <CardActionsContainer farm={farm} ethereum={ethereum} account={account} />
       <Flex justifyContent='space-between' mt='24px'>
           <Text small>Deposit:</Text>

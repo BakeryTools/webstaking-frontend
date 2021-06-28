@@ -9,12 +9,12 @@ const farms: FarmConfig[] = [
     lpSymbol: 'TBAKE-BUSD LP',
     lpAddresses: {
       97: '0x862F11650D2C19C2D4768F6acD8212478FeE5472',
-      56: '0x19e7cbecdd23a16dfa5573df54d98f7caae03019',
+      56: '0x91F2DBfB001E1CF49243CE162BFDff644B0C1647',
     },
     tokenSymbol: 'TBAKE',
     tokenAddresses: {
       97: '0xE5104E44ddAb73075Fe22F71CAad2584cF7a6D56',
-      56: '0xf952fc3ca7325cc27d15885d37117676d25bfda6',
+      56: '0x26d6e280f9687c463420908740ae59f712419147',
     },
     quoteTokenSymbol: QuoteToken.BUSD,
     quoteTokenAddresses: contracts.busd,
@@ -25,12 +25,12 @@ const farms: FarmConfig[] = [
     lpSymbol: 'TBAKE-BNB LP',
     lpAddresses: {
       97: '0x09a53511f17eA9737B9B445f1ffC2A42B90fbcA0',
-      56: '0xd1b59d11316e87c3a0a069e80f590ba35cd8d8d3',
+      56: '0xf1842C074DcAD6091ac029056A5af4F6007f0F52',
     },
     tokenSymbol: 'TBAKE',
     tokenAddresses: {
       97: '0xE5104E44ddAb73075Fe22F71CAad2584cF7a6D56',
-      56: '0xf952fc3ca7325cc27d15885d37117676d25bfda6',
+      56: '0x26d6e280f9687c463420908740ae59f712419147',
     },
     quoteTokenSymbol: QuoteToken.BNB,
     quoteTokenAddresses: contracts.wbnb,
@@ -41,7 +41,7 @@ const farms: FarmConfig[] = [
     lpSymbol: 'BNB-BUSD LP',
     lpAddresses: {
       97: '0x575Cb459b6E6B8187d3Ef9a25105D64011874820',
-      56: '0x1b96b92314c44b159149f7e0303511fb2fc4774f',
+      56: '0x58F876857a02D6762E0101bb5C46A8c1ED44Dc16',
     },
     tokenSymbol: 'BNB',
     tokenAddresses: {
@@ -58,12 +58,12 @@ const farms: FarmConfig[] = [
     lpSymbol: 'TBAKE',
     lpAddresses: {
       97: '0x862F11650D2C19C2D4768F6acD8212478FeE5472',
-      56: '0x19e7cbecdd23a16dfa5573df54d98f7caae03019', // TBAKE-BUSD LP
+      56: '0x91F2DBfB001E1CF49243CE162BFDff644B0C1647', // TBAKE-BUSD LP
     },
     tokenSymbol: 'TBAKE',
     tokenAddresses: {
       97: '0xE5104E44ddAb73075Fe22F71CAad2584cF7a6D56',
-      56: '0xf952fc3ca7325cc27d15885d37117676d25bfda6',
+      56: '0x26d6e280f9687c463420908740ae59f712419147',
     },
     quoteTokenSymbol: QuoteToken.BUSD,
     quoteTokenAddresses: contracts.busd,
@@ -75,7 +75,7 @@ const farms: FarmConfig[] = [
     lpSymbol: 'WBNB',
     lpAddresses: {
       97: '0x575Cb459b6E6B8187d3Ef9a25105D64011874820',
-      56: '0x19e7cbecdd23a16dfa5573df54d98f7caae03019', // BNB-BUSD LP (BUSD-BUSD will ignore)
+      56: '0x58F876857a02D6762E0101bb5C46A8c1ED44Dc16', // BNB-BUSD LP (BUSD-BUSD will ignore)
     },
     tokenSymbol: 'WBNB',
     tokenAddresses: {

@@ -33,6 +33,17 @@ const DepositModal: React.FC<DepositModalProps> = ({ max, onConfirm, onDismiss, 
     setVal(fullBalance)
   }, [fullBalance, setVal])
 
+  const handleDeposit = async () => {
+    setPendingTx(true)
+    try {
+      await onConfirm(val)
+      setPendingTx(false)
+    } catch (error) {
+      setPendingTx(false)
+    }
+    onDismiss();
+  };
+
   return (
     <Modal title={`${TranslateString(316, 'Deposit')} ${tokenName} Tokens`} onDismiss={onDismiss}>
       <TokenInput
@@ -49,12 +60,7 @@ const DepositModal: React.FC<DepositModalProps> = ({ max, onConfirm, onDismiss, 
         </Button>
         <Button
           disabled={pendingTx}
-          onClick={async () => {
-            setPendingTx(true)
-            await onConfirm(val)
-            setPendingTx(false)
-            onDismiss()
-          }}
+          onClick={handleDeposit}
         >
           {pendingTx ? TranslateString(488, 'Pending Confirmation') : TranslateString(464, 'Confirm')}
         </Button>

@@ -1562,10 +1562,10 @@
     "@ethersproject/properties" "^5.0.3"
     "@ethersproject/strings" "^5.0.4"
 
-"@evercreative/bakery-tools-uikit@^1.0.13":
-  version "1.0.13"
-  resolved "https://registry.yarnpkg.com/@evercreative/bakery-tools-uikit/-/bakery-tools-uikit-1.0.13.tgz#b3aa1cbc61b82db9d2d1ce6a6dcdc736688522f0"
-  integrity sha512-V4IwTqRrUvV2bPjjV/xIQwUzyPszqUVOAnaxfNCi2SPshH/31vYx+wTpgB+4R0aaknLUGHz3zxrQ7bcpHTzPNw==
+"@evercreative/bakery-tools-uikit@^1.0.15":
+  version "1.0.15"
+  resolved "https://registry.yarnpkg.com/@evercreative/bakery-tools-uikit/-/bakery-tools-uikit-1.0.15.tgz#8f39ea531b818dbfd7c682aaaeef363e95b9bb96"
+  integrity sha512-JFoOmlsABeWrHt8mOoTxilR4EVf9Pl5hBC6e96MDxpHtv8TbLE0/EUYdBXe3Rp7xDJYGu9CgeuG1ZsqnLq0lHQ==
   dependencies:
     "@types/lodash" "^4.14.162"
     "@types/styled-system" "^5.1.10"
@@ -12547,6 +12547,13 @@ react-chartjs-2@^2.11.1:
   integrity sha512-G7cNq/n2Bkh/v4vcI+GKx7Q1xwZexKYhOSj2HmrFXlvNeaURWXun6KlOUpEQwi1cv9Tgs4H3kGywDWMrX2kxfA==
   dependencies:
     lodash "^4.17.19"
+    prop-types "^15.7.2"
+
+react-countdown@^2.3.2:
+  version "2.3.2"
+  resolved "https://registry.yarnpkg.com/react-countdown/-/react-countdown-2.3.2.tgz#4cc27f28f2dcd47237ee66e4b9f6d2a21fc0b0ad"
+  integrity sha512-Q4SADotHtgOxNWhDdvgupmKVL0pMB9DvoFcxv5AzjsxVhzOVxnttMbAywgqeOdruwEAmnPhOhNv/awAgkwru2w==
+  dependencies:
     prop-types "^15.7.2"
 
 react-countup@^4.3.3:

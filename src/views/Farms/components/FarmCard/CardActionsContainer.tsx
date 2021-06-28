@@ -3,12 +3,13 @@ import BigNumber from 'bignumber.js'
 import styled from 'styled-components'
 import { provider } from 'web3-core'
 import { getContract } from 'utils/erc20'
-import { Button, Flex, Text } from '@evercreative/bakery-tools-uikit'
+import { Flex, Text } from '@evercreative/bakery-tools-uikit'
 import { Farm } from 'state/types'
 import { useFarmFromPid, useFarmUser } from 'state/hooks'
 import useI18n from 'hooks/useI18n'
 import UnlockButton from 'components/UnlockButton'
 import { useApprove } from 'hooks/useApprove'
+import ActionButton from '../../../../components/ActionButton';
 import StakeAction from './StakeAction'
 import HarvestAction from './HarvestAction'
 
@@ -58,9 +59,9 @@ const CardActions: React.FC<FarmCardActionsProps> = ({ farm, ethereum, account }
     return isApproved ? (
       <StakeAction stakedBalance={stakedBalance} tokenBalance={tokenBalance} tokenName={lpName} pid={pid} depositFeeBP={depositFeeBP} />
     ) : (
-      <Button size='sm' variant='secondary' mt="8px" fullWidth disabled={requestedApproval} onClick={handleApprove}>
+      <ActionButton size='sm' variant='secondary' mt="8px" fullWidth disabled={requestedApproval} onClick={handleApprove}>
         {TranslateString(999, 'Approve Contract')}
-      </Button>
+      </ActionButton>
     )
   }
 

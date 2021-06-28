@@ -1,13 +1,14 @@
 import React from 'react'
 import styled from 'styled-components'
 import BigNumber from 'bignumber.js'
-import { Button, Flex, Heading, IconButton, AddIcon, MinusIcon, useModal } from '@evercreative/bakery-tools-uikit'
+import { Flex, Heading, IconButton, AddIcon, MinusIcon, useModal } from '@evercreative/bakery-tools-uikit'
 import useI18n from 'hooks/useI18n'
 import useStake from 'hooks/useStake'
 import useUnstake from 'hooks/useUnstake'
 import { getBalanceNumber } from 'utils/formatBalance'
 import DepositModal from '../DepositModal'
 import WithdrawModal from '../WithdrawModal'
+import ActionButton from '../../../../components/ActionButton';
 
 interface FarmCardActionsProps {
   stakedBalance?: BigNumber
@@ -39,7 +40,7 @@ const StakeAction: React.FC<FarmCardActionsProps> = ({ stakedBalance, tokenBalan
 
   const renderStakingButtons = () => {
     return rawStakedBalance === 0 ? (
-      <Button size='sm' variant='secondary' onClick={onPresentDeposit}>{TranslateString(999, 'Stake')}</Button>
+      <ActionButton size='sm' variant='secondary' onClick={onPresentDeposit}>{TranslateString(999, 'Stake')}</ActionButton>
     ) : (
       <IconButtonWrapper>
         <IconButton variant="tertiary" onClick={onPresentWithdraw} mr="6px">

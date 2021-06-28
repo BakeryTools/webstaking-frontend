@@ -32,6 +32,17 @@ const WithdrawModal: React.FC<WithdrawModalProps> = ({ onConfirm, onDismiss, max
     setVal(fullBalance)
   }, [fullBalance, setVal])
 
+  const handleWithdraw = async () => {
+    setPendingTx(true)
+    try {
+      await onConfirm(val)
+      setPendingTx(false)
+    } catch (error) {
+      setPendingTx(false)
+    }
+    onDismiss();
+  };
+
   return (
     <Modal title={`Withdraw ${tokenName}`} onDismiss={onDismiss}>
       <TokenInput
@@ -47,12 +58,7 @@ const WithdrawModal: React.FC<WithdrawModalProps> = ({ onConfirm, onDismiss, max
         </Button>
         <Button
           disabled={pendingTx}
-          onClick={async () => {
-            setPendingTx(true)
-            await onConfirm(val)
-            setPendingTx(false)
-            onDismiss()
-          }}
+          onClick={handleWithdraw}
         >
           {pendingTx ? TranslateString(488, 'Pending Confirmation') : TranslateString(464, 'Confirm')}
         </Button>

@@ -14,6 +14,7 @@ import useTokenBalance from '../../../hooks/useTokenBalance'
 import { getCakeAddress } from '../../../utils/addressHelpers'
 import useAllEarnings from '../../../hooks/useAllEarnings'
 import { getBalanceNumber } from '../../../utils/formatBalance'
+import ActionButton from '../../../components/ActionButton';
 
 const StyledFarmStakingCard = styled(Card)`
 `
@@ -55,6 +56,7 @@ const FarmedStakingCard = () => {
     try {
       await onReward()
     } catch (error) {
+      setPendingTx(false)
       // TODO: find a way to handle when the user rejects transaction or it fails
     } finally {
       setPendingTx(false)
@@ -80,7 +82,8 @@ const FarmedStakingCard = () => {
         </Block>
         <Actions>
           {account ? (
-            <Button
+            <ActionButton
+              variant='secondary'
               id="harvest-all"
               disabled={balancesWithValue.length <= 0 || pendingTx}
               onClick={harvestAllFarms}
@@ -89,7 +92,7 @@ const FarmedStakingCard = () => {
               {pendingTx
                 ? 'Collecting TBAKE'
                 : `Harvest all (${balancesWithValue.length})`}
-            </Button>
+            </ActionButton>
           ) : (
             <UnlockButton fullWidth />
           )}

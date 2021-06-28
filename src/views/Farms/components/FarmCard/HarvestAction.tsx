@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
 import BigNumber from 'bignumber.js'
-import { Button, Flex, Heading } from '@evercreative/bakery-tools-uikit'
+import { Flex, Heading } from '@evercreative/bakery-tools-uikit'
 import useI18n from 'hooks/useI18n'
 import { useHarvest } from 'hooks/useHarvest'
 import { getBalanceNumber } from 'utils/formatBalance'
 import styled from 'styled-components'
-import useStake from '../../../../hooks/useStake'
+// import useStake from '../../../../hooks/useStake'
+import ActionButton from '../../../../components/ActionButton';
 
 interface FarmCardActionsProps {
   earnings?: BigNumber
@@ -23,10 +24,20 @@ const HarvestAction: React.FC<FarmCardActionsProps> = ({ earnings, pid }) => {
   const TranslateString = useI18n()
   const [pendingTx, setPendingTx] = useState(false)
   const { onReward } = useHarvest(pid)
-  const { onStake } = useStake(pid)
+  // const { onStake } = useStake(pid)
 
   const rawEarningsBalance = getBalanceNumber(earnings)
   const displayBalance = rawEarningsBalance.toLocaleString()
+
+  const handleHarvest = async () => {
+    setPendingTx(true);
+    try {
+      await onReward();
+      setPendingTx(false)
+    } catch (error) {
+      setPendingTx(false);
+    }
+  };
 
   return (
     <Flex mb='8px' justifyContent='space-between' alignItems='center'>
@@ -47,18 +58,14 @@ const HarvestAction: React.FC<FarmCardActionsProps> = ({ earnings, pid }) => {
             {TranslateString(999, 'Compound')}
           </Button>
           : null} */}
-        <Button
+        <ActionButton
           size='sm'
           variant='secondary'
           disabled={rawEarningsBalance === 0 || pendingTx}
-          onClick={async () => {
-            setPendingTx(true)
-            await onReward()
-            setPendingTx(false)
-          }}
+          onClick={handleHarvest}
         >
           {TranslateString(999, 'Harvest')}
-        </Button>
+        </ActionButton>
       </BalanceAndCompound>
     </Flex>
   )
