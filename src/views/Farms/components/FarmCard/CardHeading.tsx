@@ -34,6 +34,10 @@ const FarmImageWrapper = styled.div<{ isTokenOnly: boolean }>`
   width: ${({ isTokenOnly }) => isTokenOnly ? '4rem' : '7.5rem'};
   border: 2px solid ${({ theme }) => theme.colors.primary};
   border-radius: 80px;
+
+  img {
+    border-radius: 50%;
+  }
 `;
 
 const CardHeading: React.FC<ExpandableSectionProps> = ({
@@ -51,8 +55,7 @@ const CardHeading: React.FC<ExpandableSectionProps> = ({
         {farm.isTokenOnly ?
           <>
             <TokenSymbolLabel color='primary' fontSize='18px' >{farm.lpSymbol}</TokenSymbolLabel>
-            <TokenSymbolLabel fontSize='18px'>{farm.tokenSymbol}</TokenSymbolLabel>
-            
+            <TokenSymbolLabel fontSize='18px'>{farm.masterChefSymbol === 'PLOCK' ? 'PLOCK' : farm.tokenSymbol}</TokenSymbolLabel>
           </>
           : 
           <TokenSymbolLabel color='primary' fontSize='18px' >{farm.lpSymbol}</TokenSymbolLabel>

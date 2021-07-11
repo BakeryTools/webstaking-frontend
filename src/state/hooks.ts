@@ -2,8 +2,8 @@ import BigNumber from 'bignumber.js'
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import useRefresh from 'hooks/useRefresh'
-import { fetchFarmsPublicDataAsync, fetchPoolsUserDataAsync } from './actions'
-import { State, Farm, Pool } from './types'
+import { fetchFarmsPublicDataAsync } from './actions'
+import { State, Farm } from './types'
 import { QuoteToken } from '../config/constants/types'
 
 const ZERO = new BigNumber(0)
@@ -24,8 +24,8 @@ export const useFarms = (): Farm[] => {
   return farms
 }
 
-export const useFarmFromPid = (pid): Farm => {
-  const farm = useSelector((state: State) => state.farms.data.find((f) => f.pid === pid))
+export const useFarmFromPid = (pid, masterChefSymbol): Farm => {
+  const farm = useSelector((state: State) => state.farms.data.find((f) => f.pid === pid && f.masterChefSymbol === masterChefSymbol))
   return farm
 }
 
@@ -34,8 +34,8 @@ export const useFarmFromSymbol = (lpSymbol: string): Farm => {
   return farm
 }
 
-export const useFarmUser = (pid) => {
-  const farm = useFarmFromPid(pid)
+export const useFarmUser = (pid, masterChefSymbol) => {
+  const farm = useFarmFromPid(pid, masterChefSymbol)
 
   return {
     allowance: farm.userData ? new BigNumber(farm.userData.allowance) : new BigNumber(0),
@@ -46,32 +46,11 @@ export const useFarmUser = (pid) => {
   }
 }
 
-
-// Pools
-
-export const usePools = (account): Pool[] => {
-  const { fastRefresh } = useRefresh()
-  const dispatch = useDispatch()
-  useEffect(() => {
-    if (account) {
-      dispatch(fetchPoolsUserDataAsync(account))
-    }
-  }, [account, dispatch, fastRefresh])
-
-  const pools = useSelector((state: State) => state.pools.data)
-  return pools
-}
-
-export const usePoolFromPid = (sousId): Pool => {
-  const pool = useSelector((state: State) => state.pools.data.find((p) => p.sousId === sousId))
-  return pool
-}
-
 // Prices
 
 export const usePriceBnbBusd = (): BigNumber => {
   const pid = 4 // BUSD-BNB LP
-  const farm = useFarmFromPid(pid)
+  const farm = useFarmFromPid(pid, '');
   return farm.tokenPriceVsQuote ? new BigNumber(farm.tokenPriceVsQuote) : ZERO
 }
 
@@ -81,7 +60,7 @@ export const usePriceCakeBusd = (): BigNumber => {
   // const farm = useFarmFromPid(pid)
   // return farm.tokenPriceVsQuote ? bnbPriceUSD.times(farm.tokenPriceVsQuote) : ZERO
   const pid = 0; // EGG-BUSD LP
-  const farm = useFarmFromPid(pid);
+  const farm = useFarmFromPid(pid, '');
   return farm.tokenPriceVsQuote ? new BigNumber(farm.tokenPriceVsQuote) : ZERO;
 }
 

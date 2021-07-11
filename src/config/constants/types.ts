@@ -26,7 +26,8 @@ export enum QuoteToken {
   'BUSD' = 'BUSD',
   'TWT' = 'TWT',
   'UST' = 'UST',
-  'TBAKE' = 'TBAKE'
+  'TBAKE' = 'TBAKE',
+  'PLOCK' = 'PLOCK'
 }
 
 export enum PoolCategory {
@@ -51,7 +52,9 @@ export interface FarmConfig {
   multiplier?: string
   isTokenOnly?: boolean
   isCommunity?: boolean
+  visible?: boolean
   risk: number
+  masterChefSymbol?: string,
   dual?: {
     rewardPerBlock: number
     earnLabel: string

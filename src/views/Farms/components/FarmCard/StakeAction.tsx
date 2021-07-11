@@ -6,16 +6,21 @@ import useI18n from 'hooks/useI18n'
 import useStake from 'hooks/useStake'
 import useUnstake from 'hooks/useUnstake'
 import { getBalanceNumber } from 'utils/formatBalance'
+import { Farm } from 'state/types'
 import DepositModal from '../DepositModal'
 import WithdrawModal from '../WithdrawModal'
 import ActionButton from '../../../../components/ActionButton';
 
+export interface FarmWithStakedValue extends Farm {
+  apy?: BigNumber
+}
 interface FarmCardActionsProps {
   stakedBalance?: BigNumber
   tokenBalance?: BigNumber
   tokenName?: string
   pid?: number
   depositFeeBP?: number
+  farm?: FarmWithStakedValue
 }
 
 const IconButtonWrapper = styled.div`
@@ -25,10 +30,10 @@ const IconButtonWrapper = styled.div`
   }
 `
 
-const StakeAction: React.FC<FarmCardActionsProps> = ({ stakedBalance, tokenBalance, tokenName, pid, depositFeeBP}) => {
+const StakeAction: React.FC<FarmCardActionsProps> = ({ stakedBalance, tokenBalance, tokenName, pid, farm, depositFeeBP}) => {
   const TranslateString = useI18n()
-  const { onStake } = useStake(pid)
-  const { onUnstake } = useUnstake(pid)
+  const { onStake } = useStake(pid, farm.masterChefSymbol)
+  const { onUnstake } = useUnstake(pid, farm.masterChefSymbol)
 
   const rawStakedBalance = getBalanceNumber(stakedBalance)
   const displayBalance = rawStakedBalance.toLocaleString()

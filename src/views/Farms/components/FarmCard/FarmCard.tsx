@@ -39,7 +39,7 @@ interface FarmCardProps {
 
 const FarmCard: React.FC<FarmCardProps> = ({ farm, removed, cakePrice, bnbPrice, ethereum, account }) => {
   const TranslateString = useI18n()
-  const { stakedBalance, depositedAt } = useFarmUser(farm.pid);
+  const { stakedBalance, depositedAt } = useFarmUser(farm.pid, farm.masterChefSymbol);
 
   // const isCommunityFarm = communityFarms.includes(farm.tokenSymbol)
   // We assume the token name is coin pair + lp e.g. CAKE-BNB LP, LINK-BNB LP,
@@ -118,11 +118,9 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm, removed, cakePrice, bnbPrice,
       </Flex>
       <Flex justifyContent='space-between' mb='8px'>
         <Text small>{TranslateString(318, 'Earn')}:</Text>
-        <Text small>{earnLabel}</Text>
+        <Text small>{farm.masterChefSymbol === 'PLOCK' ? 'PLOCK' : earnLabel}</Text>
       </Flex>
-
       <TimeCount depositedAt={depositedAt} stakedBalance={stakedBalance} />
-
       {/* <Flex justifyContent='space-between' mb='16px'>
         <Text small>Reward Pool:</Text>
         <Text small>523.99</Text>

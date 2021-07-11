@@ -73,7 +73,7 @@ const Farms: React.FC<FarmsProps> = (farmsProps) => {
   // )
 
   const { activeFarms, inactiveFarms, stakedOnlyFarms } = useMemo(() => {
-    const displayedFarms = farmsLP.filter(farm => farm.lpSymbol !== 'BNB-BUSD LP');
+    const displayedFarms = farmsLP.filter(farm => farm.visible);
     const filteredFarms = displayedFarms.filter(farm => farm.lpSymbol.toLowerCase().includes(searchTerm.toLowerCase()));
     const activeFarmList = filteredFarms.filter((farm) => !!farm.isTokenOnly === !!tokenMode && farm.multiplier !== '0X')
     const inactiveFarmList = filteredFarms.filter((farm) => !!farm.isTokenOnly === !!tokenMode && farm.multiplier === '0X')

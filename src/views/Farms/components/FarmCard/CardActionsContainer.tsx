@@ -29,8 +29,8 @@ interface FarmCardActionsProps {
 const CardActions: React.FC<FarmCardActionsProps> = ({ farm, ethereum, account }) => {
   const TranslateString = useI18n()
   const [requestedApproval, setRequestedApproval] = useState(false)
-  const { pid, lpAddresses, tokenAddresses, isTokenOnly, depositFeeBP } = useFarmFromPid(farm.pid)
-  const { allowance, tokenBalance, stakedBalance, earnings } = useFarmUser(pid)
+  const { pid, lpAddresses, tokenAddresses, isTokenOnly, depositFeeBP } = useFarmFromPid(farm.pid, farm.masterChefSymbol)
+  const { allowance, tokenBalance, stakedBalance, earnings } = useFarmUser(pid, farm.masterChefSymbol)
   const lpAddress = lpAddresses[process.env.REACT_APP_CHAIN_ID]
   const tokenAddress = tokenAddresses[process.env.REACT_APP_CHAIN_ID];
   const lpName = farm.lpSymbol.toUpperCase()
@@ -43,7 +43,7 @@ const CardActions: React.FC<FarmCardActionsProps> = ({ farm, ethereum, account }
     return getContract(ethereum as provider, lpAddress);
   }, [ethereum, lpAddress, tokenAddress, isTokenOnly])
 
-  const { onApprove } = useApprove(lpContract)
+  const { onApprove } = useApprove(lpContract, farm.masterChefSymbol)
 
   const handleApprove = useCallback(async () => {
     try {
@@ -57,7 +57,7 @@ const CardActions: React.FC<FarmCardActionsProps> = ({ farm, ethereum, account }
 
   const renderApprovalOrStakeButton = () => {
     return isApproved ? (
-      <StakeAction stakedBalance={stakedBalance} tokenBalance={tokenBalance} tokenName={lpName} pid={pid} depositFeeBP={depositFeeBP} />
+      <StakeAction stakedBalance={stakedBalance} tokenBalance={tokenBalance} tokenName={lpName} pid={pid} farm={farm} depositFeeBP={depositFeeBP} />
     ) : (
       <ActionButton size='sm' variant='secondary' mt="8px" fullWidth disabled={requestedApproval} onClick={handleApprove}>
         {TranslateString(999, 'Approve Contract')}
@@ -71,13 +71,13 @@ const CardActions: React.FC<FarmCardActionsProps> = ({ farm, ethereum, account }
         <Text bold textTransform="uppercase" color="primary" fontSize="12px" pr="3px">
           {/* TODO: Is there a way to get a dynamic value here from useFarmFromSymbol? */}
           {/* EGG */}
-          TBAKE
+          {farm.masterChefSymbol === 'PLOCK' ? 'PLOCK' : 'TBAKE'}
         </Text>
         <Text bold textTransform="uppercase" color="textSubtle" fontSize="12px">
           {TranslateString(999, 'Earned')}
         </Text>
       </Flex>
-      <HarvestAction earnings={earnings} pid={pid} />
+      <HarvestAction earnings={earnings} pid={pid} farm={farm} />
       <Flex mb='16px'>
         <Text bold textTransform="uppercase" color="primary" fontSize="12px" pr="3px">
           {lpName}

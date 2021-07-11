@@ -5,12 +5,18 @@ import useI18n from 'hooks/useI18n'
 import { useHarvest } from 'hooks/useHarvest'
 import { getBalanceNumber } from 'utils/formatBalance'
 import styled from 'styled-components'
+import { Farm } from 'state/types'
 // import useStake from '../../../../hooks/useStake'
 import ActionButton from '../../../../components/ActionButton';
+
+export interface FarmWithStakedValue extends Farm {
+  apy?: BigNumber
+}
 
 interface FarmCardActionsProps {
   earnings?: BigNumber
   pid?: number
+  farm: FarmWithStakedValue
 }
 
 const BalanceAndCompound = styled.div`
@@ -20,10 +26,10 @@ const BalanceAndCompound = styled.div`
   flex-direction: column;
 `
 
-const HarvestAction: React.FC<FarmCardActionsProps> = ({ earnings, pid }) => {
+const HarvestAction: React.FC<FarmCardActionsProps> = ({ earnings, pid, farm }) => {
   const TranslateString = useI18n()
   const [pendingTx, setPendingTx] = useState(false)
-  const { onReward } = useHarvest(pid)
+  const { onReward } = useHarvest(pid, farm.masterChefSymbol)
   // const { onStake } = useStake(pid)
 
   const rawEarningsBalance = getBalanceNumber(earnings)

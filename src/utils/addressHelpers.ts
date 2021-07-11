@@ -5,8 +5,8 @@ const chainId = process.env.REACT_APP_CHAIN_ID
 export const getCakeAddress = () => {
   return addresses.cake[chainId]
 }
-export const getMasterChefAddress = () => {
-  return addresses.masterChef[chainId]
+export const getMasterChefAddress = (masterChefSymbol) => {
+  return masterChefSymbol === 'PLOCK' ? addresses.plockMasterChef[chainId] : addresses.masterChef[chainId]
 }
 export const getMulticallAddress = () => {
   return addresses.mulltiCall[chainId]
