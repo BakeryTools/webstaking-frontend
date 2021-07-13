@@ -32,9 +32,9 @@ const CakeStats = () => {
   const cakeSupply = getBalanceNumber(circSupply);
   const marketCap = tbakePrice.times(circSupply);
 
-  let tbakePerBlock = 0;
-  if(farms && farms[0] && farms[0].tbakePerBlock){
-    tbakePerBlock = new BigNumber(farms[0].tbakePerBlock).div(new BigNumber(10).pow(18)).toNumber();
+  let tokenPerBlock = 0;
+  if(farms && farms[0] && farms[0].tokenPerBlock){
+    tokenPerBlock = new BigNumber(farms[0].tokenPerBlock).div(new BigNumber(10).pow(18)).toNumber();
   }
 
   return (
@@ -61,7 +61,7 @@ const CakeStats = () => {
         </Row>
         <Row>
           <Text fontSize="14px">New TBAKE/block</Text>
-          <Text bold fontSize="14px">{tbakePerBlock}</Text>
+          <Text bold fontSize="14px">{tokenPerBlock}</Text>
         </Row>
       </CardBody>
     </StyledCakeStats>

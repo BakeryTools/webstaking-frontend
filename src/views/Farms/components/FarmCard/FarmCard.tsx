@@ -71,9 +71,9 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm, removed, cakePrice, bnbPrice,
     maximumFractionDigits: 2,
   })
 
-  let tbakePerBlock = 0;
-  if (farm.tbakePerBlock) {
-    tbakePerBlock = new BigNumber(farm.tbakePerBlock).div(new BigNumber(10).pow(18)).toNumber();
+  let tokenPerBlock = 0;
+  if (farm.tokenPerBlock) {
+    tokenPerBlock = new BigNumber(farm.tokenPerBlock).div(new BigNumber(10).pow(18)).toNumber();
   }
 
   const { risk } = farm
@@ -132,7 +132,7 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm, removed, cakePrice, bnbPrice,
         </Flex>
         <Flex justifyContent='space-between'>
           <Text small>Emission Rate:</Text>
-          <Text small>{tbakePerBlock}/BLOCK</Text>
+          <Text small>{tokenPerBlock}/BLOCK</Text>
         </Flex>
         <Flex justifyContent='space-between'>
           <Text small>Total Value:</Text>

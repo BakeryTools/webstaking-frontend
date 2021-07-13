@@ -49,7 +49,6 @@ const fetchFarms = async () => {
         },
       ]
       
-      console.log('ant : tokenBalanceLP => ', farmConfig);
       const [
         tokenBalanceLP,
         quoteTokenBlanceLP,
@@ -58,14 +57,6 @@ const fetchFarms = async () => {
         tokenDecimals,
         quoteTokenDecimals
       ] = await multicall(erc20, calls)
-
-      console.log('ant : farm data => ', tokenBalanceLP,
-      quoteTokenBlanceLP,
-      lpTokenBalanceMC,
-      lpTotalSupply,
-      tokenDecimals,
-      quoteTokenDecimals);
-
 
       let tokenAmount;
       let lpTotalInQuoteToken;
@@ -102,7 +93,7 @@ const fetchFarms = async () => {
       }
       
       const masterchefABI = getMasterchefABI(farmConfig.masterChefSymbol);
-      const [info, totalAllocPoint, tbakePerBlock] = await multicall(masterchefABI, [
+      const [info, totalAllocPoint, tokenPerBlock] = await multicall(masterchefABI, [
         {
           address: getMasterChefAddress(farmConfig.masterChefSymbol),
           name: 'poolInfo',
@@ -114,11 +105,9 @@ const fetchFarms = async () => {
         },
         {
           address: getMasterChefAddress(farmConfig.masterChefSymbol),
-          name: 'tbakePerBlock',
+          name: farmConfig.masterChefSymbol === 'PLOCK' ? 'plockPerBlock' : 'tbakePerBlock',
         },
       ])
-
-      console.log('ant : info, totalAllocPoint, tbakePerBlock => ', info, totalAllocPoint, tbakePerBlock);
 
       const allocPoint = new BigNumber(info.allocPoint._hex)
       const poolWeight = allocPoint.div(new BigNumber(totalAllocPoint))
@@ -132,7 +121,7 @@ const fetchFarms = async () => {
         poolWeight: poolWeight.toNumber(),
         multiplier: `${allocPoint.div(100).toString()}X`,
         depositFeeBP: info.depositFeeBP,
-        tbakePerBlock: new BigNumber(tbakePerBlock).toNumber(),
+        tokenPerBlock: new BigNumber(tokenPerBlock).toNumber(),
       }
     }),
   )

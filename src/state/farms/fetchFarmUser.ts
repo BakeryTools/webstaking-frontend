@@ -79,7 +79,7 @@ export const fetchFarmUserEarnings = async (account: string) => {
   for (let i = 0; i < farmsConfig.length; i++) {
     const call = [{
       address: getMasterChefAddress(farmsConfig[i].masterChefSymbol),
-      name: 'pendingTBAKE',
+      name: farmsConfig[i].masterChefSymbol === 'PLOCK' ? 'pendingPLOCK' : 'pendingTBAKE',
       params: [farmsConfig[i].pid, account],
     }];
 

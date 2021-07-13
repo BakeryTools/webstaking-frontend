@@ -96,9 +96,10 @@ const farms: FarmConfig[] = [
   {
     pid: 0,
     risk: 5,
+    isTokenOnly: true,
     masterChefSymbol: 'PLOCK',
     lpSymbol: 'PLOCK',
-    visible: false,
+    visible: true,
     lpAddresses: {
       97: '0x95D1304B0E3e3F40E684214fE47b1d013A8c8Ab5',
       56: '0x6C45C9D632c5f0867F2Baf830c6d34EA4C67158D', // PLOCK-BNB LP
@@ -133,21 +134,20 @@ const farms: FarmConfig[] = [
   // {
   //   pid: 2,
   //   risk: 5,
-  //   isTokenOnly: true,
   //   masterChefSymbol: 'PLOCK',
-  //   lpSymbol: 'PLOCK',
-  //   visible: true,
+  //   lpSymbol: 'PLOCK-BNB LP',
+  //   visible: false,
   //   lpAddresses: {
   //     97: '0x95D1304B0E3e3F40E684214fE47b1d013A8c8Ab5',
-  //     56: '0x91F2DBfB001E1CF49243CE162BFDff644B0C1647', // PLOCK-BUSD LP
+  //     56: '0x6C45C9D632c5f0867F2Baf830c6d34EA4C67158D', // PLOCK-BNB LP
   //   },
   //   tokenSymbol: 'PLOCK',
   //   tokenAddresses: {
   //     97: '0xE6B4D6B7adfa9F6916985842989f5654Fcc41Bd1',
   //     56: '0xce0f314013dc814f2da9d58160c54231fb2ddae2',
   //   },
-  //   quoteTokenSymbol: QuoteToken.BUSD,
-  //   quoteTokenAddresses: contracts.busd,
+  //   quoteTokenSymbol: QuoteToken.BNB,
+  //   quoteTokenAddresses: contracts.wbnb,
   // },
 ]
 
