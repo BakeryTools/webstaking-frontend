@@ -19,17 +19,18 @@ export const useHarvest = (farmPid: number, masterChefSymbol?: string) => {
   return { onReward: handleHarvest }
 }
 
-export const useAllHarvest = (farmPids: number[]) => {
+export const useAllHarvest = (farms) => {
   const { account } = useWallet()
   const masterChefContract = useMasterchef('')
+  const plockMasterChef = useMasterchef('PLOCK')
 
   const handleHarvest = useCallback(async () => {
-    const harvestPromises = farmPids.reduce((accum, pid) => {
-      return [...accum, harvest(masterChefContract, pid, account)]
+    const harvestPromises = farms.reduce((accum, farm) => {
+      return [...accum, harvest(farm.masterChefSymbol === 'PLOCK' ? plockMasterChef : masterChefContract, farm.pid, account)]
     }, [])
 
     return Promise.all(harvestPromises)
-  }, [account, farmPids, masterChefContract])
+  }, [account, farms, masterChefContract, plockMasterChef])
 
   return { onReward: handleHarvest }
 }

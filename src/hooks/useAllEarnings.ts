@@ -7,7 +7,7 @@ import { farmsConfig } from 'config/constants'
 import getMasterchefABI from 'utils/getMasterchefABI'
 import useRefresh from './useRefresh'
 
-const useAllEarnings = () => {
+const useAllEarnings = (masterChefSymbol) => {
   const [balances, setBalance] = useState([])
   const { account }: { account: string } = useWallet()
   const { fastRefresh } = useRefresh()
@@ -15,30 +15,22 @@ const useAllEarnings = () => {
   useEffect(() => {
     const fetchAllBalances = async () => {
       const res = [];
-      for (let i = 0; i < farmsConfig.length; i++) {
+      const farms = farmsConfig.filter(farm => farm.masterChefSymbol === masterChefSymbol);
+
+      for (let i = 0; i < farms.length; i++) {
         const call = [{
-          address: getMasterChefAddress(farmsConfig[i].masterChefSymbol),
-          name: farmsConfig[i].masterChefSymbol === 'PLOCK' ? 'pendingPLOCK' : 'pendingTBAKE',
-          params: [farmsConfig[i].pid, account],
+          address: getMasterChefAddress(farms[i].masterChefSymbol),
+          name: farms[i].masterChefSymbol === 'PLOCK' ? 'pendingPLOCK' : 'pendingTBAKE',
+          params: [farms[i].pid, account],
         }];
 
-        const masterChefABI = getMasterchefABI(farmsConfig[i].masterChefSymbol);
+        const masterChefABI = getMasterchefABI(farms[i].masterChefSymbol);
         const farmRes = multicall(masterChefABI, call);
         res.push(farmRes);
       }
 
       const allBalances = await Promise.all(res);
       setBalance(allBalances.map(balance => balance[0]));
-
-      // const calls = farmsConfig.map((farm) => ({
-      //   address: getMasterChefAddress(farm.masterChefSymbol),
-      //   name: 'pendingTBAKE',
-      //   params: [farm.pid, account],
-      // }))
-
-      // const res = await multicall(masterChefABI, calls)
-
-      // setBalance(res)
     }
 
     if (account) {
